@@ -1,80 +1,120 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: http://frontend.park.mail.ru/api/
 
-# Ogye_kgt
+# Technopark frontend
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+Описание API проекта по курсу "Фронтенд" Технопарка Mail.Ru
 
-## Questions Collection [/questions]
+## Авторизация [/session]
 
-### List All Questions [GET]
+### Проверка авторизации пользователя [GET]
 
 + Response 200 (application/json)
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
+        {
+            "id": 1
+        }
+        
++ Response 401 (application/json)
 
-### Create a New Question [POST]
+        {}
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+### Логин пользователя [POST]
 
 + Request (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
+            "login": "dmitrydorofeev",
+            "password": "veeforodyrtimd"
         }
 
-+ Response 201 (application/json)
++ Response 200 (application/json)
 
-    + Headers
+        {
+            "id": 1
+        }
+        
+        
++ Response 400 (application/json)
 
-            Location: /questions/2
+        {}
+        
 
-    + Body
+## Пользователи [/user]
 
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
-            }
+### Создание пользователя [POST]
+
++ Request (application/json)
+
+        {
+            "login": "dmitrydorofeev",
+            "password": "veeforodyrtimd",
+            "email": "me@dmitrydorofeev.ru"
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "id": 7
+        }
+        
++ Response 403 (application/json)
+
+        {}
+
+## Конкретный юзер [/user/{id}]
++ Parameters
+    + id (number) - ID пользователя
+        
+### Получение информации о пользователе [GET]
+
++ Response 200 (application/json)
+
+        {
+            "id": 7,
+            "login": "dmitrydorofeev",
+            "email": "me@dmitrydorofeev.ru"
+        }
+
+
++ Response 401 (application/json)
+
+        {}
+
+### Редактирование пользователя [PUT]
+
++ Request (application/json)
+
+        {
+            "login": "dmitrydorofeev",
+            "password": "veeforodyrtimd",
+            "email": "me@dmitrydorofeev.ru"
+        }
+        
+
++ Response 200 (application/json)
+
+        {
+            "id": "1"
+        }
+        
++ Response 403 (application/json)
+
+        {
+            "status": 403,
+            "message": "Чужой юзер"
+        }
+
+### Удаление пользователя [DELETE]
+        
+
++ Response 200 (application/json)
+
+        {}
+        
++ Response 403 (application/json)
+
+        {
+            "status": 403,
+            "message": "Чужой юзер"
+        }
