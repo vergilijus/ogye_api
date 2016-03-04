@@ -19,7 +19,7 @@ HOST: http://frontend.park.mail.ru/api/
 
         {}
 
-### Логин пользователя [POST]
+### Логин пользователя [PUT]
 
 + Request (application/json)
 
@@ -38,11 +38,16 @@ HOST: http://frontend.park.mail.ru/api/
 + Response 400 (application/json)
 
         {}
-        
+
+### Логаут [DELETE]
+
++ Response 200 (application/json)
+
+        {}        
 
 ## Пользователи [/user]
 
-### Создание пользователя [POST]
+### Создание пользователя [PUT]
 
 + Request (application/json)
 
@@ -81,7 +86,7 @@ HOST: http://frontend.park.mail.ru/api/
 
         {}
 
-### Редактирование пользователя [PUT]
+### Редактирование пользователя [POST]
 
 + Request (application/json)
 
